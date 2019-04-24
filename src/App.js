@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import search from './algs';
+import search from './Recursive';
 
 class App extends Component {
 
@@ -34,6 +34,7 @@ class App extends Component {
         if(ri !== -1){
             grid[ri][ci] = 0;
         }
+            return grid;
     };
 
 
@@ -43,17 +44,21 @@ class App extends Component {
             default:
                 return;
             case "start":
-                this.findSameType(grid, 1);
+                grid = this.findSameType(grid, 1);
                 grid[rowIndex][cellIndex] = 1;
                 this.setState({grid:grid});
                 break;
             case "end":
-                this.findSameType(grid, 2);
+               grid = this.findSameType(grid, 2);
                 grid[rowIndex][cellIndex] = 2;
                 this.setState({grid:grid});
                 break;
             case "wall":
-                grid[rowIndex][cellIndex] = 3;
+                if(grid[rowIndex][cellIndex] === 3) {
+                    grid[rowIndex][cellIndex] = 0;
+                } else {
+                    grid[rowIndex][cellIndex] = 3;
+                }
                 this.setState({grid:grid});
                 break;
         }
