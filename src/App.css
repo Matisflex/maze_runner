@@ -102,6 +102,9 @@
 .traveled {
     background-color: orange;
 }
+.current {
+    background-color: blueviolet;
+}
 
 .selected {
     border: white 5px solid;

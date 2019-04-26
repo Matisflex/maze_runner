@@ -84,12 +84,12 @@ class App extends Component {
         let editMode = this.state.editMode;
         let rowCounter = 0;
         let grid = this.state.grid;
-        return grid.map(val => {
+        return grid.map((val,rowIndex) => {
             let counter = 0;
             rowCounter++;
            return (
                <div className="row" key={rowCounter}>
-                   {val.map(val => {
+                   {val.map((val, cellIndex) => {
                        let c = counter;
                        let rc = rowCounter - 1;
                        let classes = ["cell"];
@@ -113,6 +113,9 @@ class App extends Component {
                        }
                        if(val === 4) {
                            classes.push("traveled");
+                       }
+                       if (this.props.currentLocation && this.props.currentLocation.y === rowIndex && this.props.currentLocation.x === cellIndex) {
+                         classes.push("current");
                        }
                        counter++;
                        return (
@@ -170,6 +173,7 @@ class App extends Component {
                     <select className="dropDown" id="alg">
                         <option value="0">Recursive search</option>
                     </select>
+                    <button id="startRunning" onClick={() => this.buildGridArray(this.state.gridSize)}>Reset</button>
                     <button id="startRunning" onClick={() => this.startSearch()}>Start</button>
                 </div>
             </div>
